@@ -108,7 +108,7 @@ install_packages() {
 build_install_benchmarks() {
 	local script=$1
 	local distro=$2
-
+echo "[DEBUG] script $1, distro $2"
 	[ -x "$LKP_SRC/pack/$script" ] || return
 
 	echo "Making $script benchmark for $distro"

@@ -302,6 +302,7 @@ class Job
 		@path_scheme = result_path.path_scheme
 		result_path['rootfs'] ||= 'debian-x86_64.cgz'
 		result_path['rootfs'] = rootfs_filename result_path['rootfs']
+		result_path['compiler'] ||= DEFAULT_COMPILER
 		result_path['path_params'] = self.path_params
 		result_path._result_root
 	end
