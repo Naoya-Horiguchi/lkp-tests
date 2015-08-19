@@ -13,7 +13,7 @@ nr_threads: 1600%
 hackbench:
   mode:
   - process
-  - threads
+  - thread
   ipc:
   - pipe
   - socket
