@@ -13,7 +13,7 @@ perf-profile:
 hackbench:
   mode:
   - process
-  - threads
+  - thread
   ipc:
   - pipe
   - socket
