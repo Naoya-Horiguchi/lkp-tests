@@ -120,3 +120,9 @@ if $opt_result_root == nil
 	save_paths(result_root, user)
 	system(LKP_SRC + '/sbin/unite-params', result_root)
 end
+
+system "kill " + File.read(TMP + "/.pid-pipe")
+system "kill " + File.read(TMP + "/.pid-wait-monitors")
+system "kill " + File.read(TMP + "/pid-monitors")
+system "kill " + File.read(TMP + "/pid-tests")
+system "kill " + File.read(TMP + "/pid-wakeup")
