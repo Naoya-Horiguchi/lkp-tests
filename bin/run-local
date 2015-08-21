@@ -121,8 +121,9 @@ if $opt_result_root == nil
 	system(LKP_SRC + '/sbin/unite-params', result_root)
 end
 
-system "kill " + File.read(TMP + "/.pid-pipe")
-system "kill " + File.read(TMP + "/.pid-wait-monitors")
-system "kill " + File.read(TMP + "/pid-monitors")
-system "kill " + File.read(TMP + "/pid-tests")
-system "kill " + File.read(TMP + "/pid-wakeup")
+["/.pid-pipe", "/.pid-wait-monitors", "/pid-monitors",
+  "/pid-tests", "/pid-wakeup"].each do |f|
+  if File.exist?(TMP + f)
+    system "kill " + File.read(TMP + f)
+  end
+end
