@@ -339,7 +339,7 @@ module Git
 end
 
 def __commit_tag(commit)
-	tags = `#{GIT} tag --points-at #{commit}`.split
+	tags = `#{GIT} tag --points-at #{commit} 2> /dev/null`.split
 	tags.each do |tag|
 		return tag if linus_tags.include? tag
 	end
