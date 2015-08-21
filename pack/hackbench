@@ -1,0 +1,16 @@
+#!/bin/bash
+
+download()
+{
+	wget -O hackbench.c http://people.redhat.com/mingo/cfs-scheduler/tools/hackbench.c
+}
+
+build()
+{
+	gcc -g -Wall -O2 -o hackbench hackbench.c -lpthread
+}
+
+install()
+{
+	/usr/bin/install hackbench /usr/bin/hackbench
+}

@@ -38,7 +38,9 @@ set_loops()
 run_hackbench()
 {
 	# args: groups number, mode [process/thread], times
-	cmd /usr/bin/hackbench -g $nr_threads --$mode $ipc_option -l $loops
+	# cmd /usr/bin/hackbench -g $nr_threads --$mode $ipc_option -l $loops
+	echo "cmd /usr/bin/hackbench $nr_threads $mode $loops"
+	cmd /usr/bin/hackbench $nr_threads $mode $loops
 }
 
 set_env
