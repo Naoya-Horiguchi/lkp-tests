@@ -2,7 +2,19 @@
 
 download()
 {
-	wget -O hackbench.c http://people.redhat.com/mingo/cfs-scheduler/tools/hackbench.c
+	# Fuchu beaker specific setting
+	[ ! -d /mnt/src ] && mkdir -p /mnt/src
+	mount nfssv.rhts.fuchu:/export /mnt/src
+	if [ $? -eq 0 ] ; then
+		df
+		mount
+		echo "git --git-dir=/mnt/src/data/user/n-horiguchi/lkp-tests-mirror/rt-tests.git/.git show HEAD:src/hackbench/hackbench.c > hackbench.c"
+		git --git-dir=/mnt/src/data/user/n-horiguchi/lkp-tests-mirror/rt-tests.git/.git show HEAD:src/hackbench/hackbench.c > hackbench.c
+		umount -f /mnt/src
+		return
+	else
+		wget -O hackbench.c https://raw.githubusercontent.com/jlelli/rt-tests/master/src/hackbench/hackbench.c
+	fi
 }
 
 build()
