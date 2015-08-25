@@ -42,12 +42,13 @@ done
 
 parse_yaml() {
 	local s='[[:space:]]*'
-	local w='[a-zA-Z0-9_]*'
+	local w='[a-zA-Z0-9_\-]*'
 	local tmp_filter="$(mktemp)"
 	ls -LR $LKP_SRC/setup $LKP_SRC/monitors $LKP_SRC/tests $LKP_SRC/daemon > $tmp_filter
-	scripts=$(cat $1 | sed -ne "s|^\($s\):|\1|" \
+	scripts=$(cat $1 | sed \
+	         -e "s|^\($w\):$s\$|\1|" \
 	         -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\2|p" \
-	         -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\2|p" | grep -x -F -f $tmp_filter | grep -v -e ':$' -e '^$')
+	         -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\2|p" | grep -x -F -f $tmp_filter | grep -v -e '^$' -e '^-' | sort -u)
 }
 
 make_wakeup() {
@@ -108,6 +109,9 @@ install_packages() {
 build_install_benchmarks() {
 	local script=$1
 	local distro=$2
+
+	# some tests/scripts uses this directory as a working directory
+	[ ! -d /lkp/benchmarks/$script ] && mkdir -p /lkp/benchmarks/$script
 
 	[ -x "$LKP_SRC/pack/$script" ] || return
 
