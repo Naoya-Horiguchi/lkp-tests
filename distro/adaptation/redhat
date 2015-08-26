@@ -67,3 +67,7 @@ libattr1-dev: libattr-devel
 libacl1-dev: libacl-devel
 rt-tests:
 ruby-git:
+btrfs-tools: btrfs-progs
+nfs-common: nfs-utils
+f2fs-tools:
+postmark:
