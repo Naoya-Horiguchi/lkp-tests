@@ -14,7 +14,6 @@ echo $((1<<20)) > /proc/sys/kernel/threads-max
 
 export CMD=cmd
 . ./hw_vars
-mount_tmpfs
 create_sparse_root
 
 set_repeat_count()
@@ -52,4 +51,3 @@ else
 fi
 
 remove_sparse_root
-remove_tmpfs
