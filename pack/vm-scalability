@@ -1,0 +1,26 @@
+#!/bin/bash
+
+download()
+{
+	# Fuchu beaker specific setting
+	[ ! -d /mnt/src ] && mkdir -p /mnt/src
+	mount nfssv.rhts.fuchu:/export /mnt/src
+	if [ $? -eq 0 ] ; then
+		echo "git clone /mnt/src/data/user/n-horiguchi/lkp-tests-mirror/vm-scalability.git"
+		git clone /mnt/src/data/user/n-horiguchi/lkp-tests-mirror/vm-scalability.git 
+		umount -f /mnt/src
+		return
+	else
+		git clone https://github.com/aristeu/vm-scalability
+	fi
+}
+
+build()
+{
+	make -C vm-scalability
+}
+
+install()
+{
+	cp -af vm-scalability/* $BM_ROOT
+}
