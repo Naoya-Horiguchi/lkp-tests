@@ -1,0 +1,29 @@
+#!/bin/bash
+
+download()
+{
+	# Fuchu beaker specific setting
+	[ ! -d /mnt/src ] && mkdir -p /mnt/src
+	mount nfssv.rhts.fuchu:/export /mnt/src
+	if [ $? -eq 0 ] ; then
+		echo "git clone /mnt/src/data/user/n-horiguchi/lkp-tests-mirror/postmark/postmark_1.51.orig.tar.gz"
+		tar zxvf /mnt/src/data/user/n-horiguchi/lkp-tests-mirror/postmark/postmark_1.51.orig.tar.gz
+		umount -f /mnt/src
+		return
+	else
+		tar zxvf /mnt/src/data/user/n-horiguchi/lkp-tests-mirror/postmark/postmark_1.51.orig.tar.gz
+	fi
+}
+
+build()
+{
+	pushd postmark-1.51 > /dev/null
+    gcc -o postmark postmark-1.51.c
+	popd > /dev/null
+}
+
+install()
+{
+	echo "cp -af postmark-1.51/postmark $BM_ROOT"
+	cp -af postmark-1.51/postmark $BM_ROOT
+}
