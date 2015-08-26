@@ -38,7 +38,7 @@ kill_monitors()
 		fi
 
 		[ -n "$pids" ] || continue
-		/bin/kill $signal $pids
+		/bin/kill $signal $pids 2> /dev/null
 	done
 }
 
