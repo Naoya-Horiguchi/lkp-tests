@@ -6,8 +6,6 @@ fs:
 - ext4
 - xfs
 - btrfs
-fs1:
-- nfsv4
 
 postmark:
   number:
