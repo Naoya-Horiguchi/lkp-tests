@@ -124,6 +124,6 @@ end
 ["/.pid-pipe", "/.pid-wait-monitors", "/pid-monitors",
   "/pid-tests", "/pid-wakeup"].each do |f|
   if File.exist?(TMP + f)
-    system "kill " + File.read(TMP + f)
+    system "kill " + File.read(TMP + f).gsub("\n", " ") + " 2> /dev/null"
   end
 end
