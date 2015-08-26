@@ -1,0 +1,7 @@
+model: Nehalem
+nr_cpu: 4
+memory: 8G
+hdd_partitions: /dev/sdb /dev/sdc
+# hdd_partitions: /dev/testing_given/vol1 /dev/testing_given/vol2 /dev/testing_given/vol3
+# swap_partitions: /dev/testing_given/vol4
+# rootfs_partition: /dev/testing_given/vol5
